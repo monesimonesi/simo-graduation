@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Human Intelligence Certification</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+</head>
+<body>
+<div id="landing" class="screen active">
+<div class="card">
+<div class="brain">🧠</div>
+<h1>Human Intelligence Certification</h1>
+<p>In un mondo in cui basta chiedere una risposta a un'Intelligenza Artificiale, oggi sei tu a metterti alla prova.</p>
+<input id="name" placeholder="Come ti chiami?">
+<button onclick="start()">Inizia</button>
+</div>
+</div>
+
+<div id="verify" class="screen">
+<div class="card">
+<h2>Verifica Human Intelligence</h2>
+<div class="bar"><div id="fill"></div></div>
+<p id="status">Avvio...</p>
+</div>
+</div>
+
+<div id="certificateScreen" class="screen">
+<div id="certificate" class="certificate">
+<div class="brain">🧠</div>
+<h1>CERTIFICATO</h1>
+<h3>DI UTILIZZO DEL CERVELLO</h3>
+<p>Si certifica che</p>
+<h2 id="certName"></h2>
+<p>ha accettato la sfida, scegliendo di mettere alla prova la propria mente in un mondo abituato ad avere risposte immediate.</p>
+<div class="badge">MISSIONE COMPLETATA</div>
+<p><strong>Human Intelligence Score</strong><br>100%</p>
+<p>✓ Certified Human</p>
+<p id="cid"></p>
+<hr>
+<p>Laurea Simone<br>22/07/2026</p>
+</div>
+<div class="buttons">
+<button onclick="downloadCert()">⬇ Scarica certificato</button>
+<button onclick="showSolution()">💡 Mostra soluzione</button>
+</div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
