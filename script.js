@@ -1,7 +1,6 @@
 const userNameInput = document.getElementById('nameInput');
 const startBtn = document.getElementById('startBtn');
 const pngBtn = document.getElementById('pngBtn');
-const pdfBtn = document.getElementById('pdfBtn');
 const landing = document.getElementById('landing');
 const verify = document.getElementById('verify');
 const certificateScreen = document.getElementById('certificateScreen');
@@ -220,32 +219,6 @@ async function saveAsImage() {
   }
 }
 
-async function saveAsPdf() {
-  try {
-    if (!window.jspdf || !window.jspdf.jsPDF) {
-      throw new Error('jsPDF non disponibile');
-    }
-
-    const canvas = await captureCertificate(2.5);
-    const imgData = canvas.toDataURL('image/png');
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({
-      orientation: 'portrait',
-      unit: 'px',
-      format: [canvas.width, canvas.height]
-    });
-
-    pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
-
-    const pdfBlob = pdf.output('blob');
-    if (!pdfBlob) throw new Error('Impossibile creare il PDF');
-
-    await shareOrOpenBlob(pdfBlob, 'certificato-human-intelligence.pdf', 'application/pdf');
-  } catch (err) {
-    alert('Non sono riuscito a creare il PDF del certificato. Riprova tra un attimo.');
-    console.error(err);
-  }
-}
 
 function init() {
   if (!userNameInput || !startBtn || !pngBtn || !pdfBtn) {
@@ -255,7 +228,6 @@ function init() {
 
   startBtn.addEventListener('click', startFlow);
   pngBtn.addEventListener('click', saveAsImage);
-  pdfBtn.addEventListener('click', saveAsPdf);
 
   userNameInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
