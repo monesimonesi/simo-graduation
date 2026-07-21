@@ -14,7 +14,7 @@
 </head>
 <body>
   <main class="app">
-    <section id="landing" class="screen active">
+    <section id="landing" class="screen active" aria-label="Accesso">
       <div class="hero-card">
         <div class="brand-mark" aria-hidden="true">🧠</div>
         <p class="eyebrow">Laurea Simone · 22/07/2026</p>
@@ -27,7 +27,7 @@
           “In un mondo che ci offre risposte immediate, non perdere il valore di porti le domande, il gusto di ragionare e la soddisfazione di trovare, con il tuo ingegno, la soluzione.”
         </blockquote>
 
-        <label class="field">
+        <label class="field" for="nameInput">
           <span>Come ti chiami?</span>
           <input id="nameInput" type="text" inputmode="text" autocomplete="name" maxlength="40" placeholder="Inserisci il tuo nome" />
         </label>
@@ -36,7 +36,7 @@
       </div>
     </section>
 
-    <section id="verify" class="screen">
+    <section id="verify" class="screen" aria-label="Verifica">
       <div class="verify-card">
         <div class="brand-mark pulse" aria-hidden="true">🧠</div>
         <h2>Verifica Human Intelligence</h2>
@@ -52,12 +52,11 @@
       </div>
     </section>
 
-    <section id="certificateScreen" class="screen certificate-screen">
+    <section id="certificateScreen" class="screen certificate-screen" aria-label="Certificato">
       <div class="certificate-shell">
         <div id="certificatePrintArea" class="certificate-stage">
           <img class="certificate-bg" src="assets/certificate-bg.png" alt="" aria-hidden="true" />
-
-          <div class="certificate-overlay">
+          <div class="certificate-overlay" aria-hidden="true">
             <div class="certificate-person">
               <p class="small-label">Si certifica che</p>
               <h2 id="certName" class="certificate-name"></h2>
@@ -67,10 +66,12 @@
 
         <div class="actions">
           <div class="download-grid">
-            <button id="pngBtn" class="primary-btn">Scarica immagine</button>
-            <button id="pdfBtn" class="secondary-btn">Scarica PDF</button>
+            <button id="pngBtn" class="primary-btn">Salva immagine</button>
+            <button id="pdfBtn" class="secondary-btn">Salva PDF</button>
           </div>
-          <p class="print-hint">Su iPhone puoi usare il menu Condividi per salvarlo in Foto o File.</p>
+          <p class="print-hint">
+            Su iPhone/iPad, se compare il menu di condivisione, puoi salvare il file in Foto o File.
+          </p>
         </div>
       </div>
     </section>
