@@ -1,53 +1,94 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Human Intelligence Certification</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#F8F2E8" />
+  <title>Human Intelligence Certification</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 </head>
 <body>
-<div id="landing" class="screen active">
-<div class="card">
-<div class="brain">🧠</div>
-<h1>Human Intelligence Certification</h1>
-<p>In un mondo in cui basta chiedere una risposta a un'Intelligenza Artificiale, oggi sei tu a metterti alla prova.</p>
-<input id="name" placeholder="Come ti chiami?">
-<button onclick="start()">Inizia</button>
-</div>
-</div>
+  <main class="app">
+    <section id="landing" class="screen active">
+      <div class="hero-card">
+        <div class="brand-mark" aria-hidden="true">🧠</div>
+        <p class="eyebrow">Laurea Simone · 22/07/2026</p>
+        <h1>Human Intelligence Certification</h1>
+        <p class="intro">
+          Complimenti: hai risolto il rompicapo.
+          Prima di ricevere il certificato, raccontaci chi sei.
+        </p>
+        <blockquote>
+          “In un mondo che ci offre risposte immediate, non perdere il valore di porti le domande, il gusto di ragionare e la soddisfazione di trovare, con il tuo ingegno, la soluzione.”
+        </blockquote>
 
-<div id="verify" class="screen">
-<div class="card">
-<h2>Verifica Human Intelligence</h2>
-<div class="bar"><div id="fill"></div></div>
-<p id="status">Avvio...</p>
-</div>
-</div>
+        <label class="field">
+          <span>Come ti chiami?</span>
+          <input id="nameInput" type="text" inputmode="text" autocomplete="name" maxlength="40" placeholder="Inserisci il tuo nome" />
+        </label>
 
-<div id="certificateScreen" class="screen">
-<div id="certificate" class="certificate">
-<div class="brain">🧠</div>
-<h1>CERTIFICATO</h1>
-<h3>DI UTILIZZO DEL CERVELLO</h3>
-<p>Si certifica che</p>
-<h2 id="certName"></h2>
-<p>ha accettato la sfida, scegliendo di mettere alla prova la propria mente in un mondo abituato ad avere risposte immediate.</p>
-<div class="badge">MISSIONE COMPLETATA</div>
-<p><strong>Human Intelligence Score</strong><br>100%</p>
-<p>✓ Certified Human</p>
-<p id="cid"></p>
-<hr>
-<p>Laurea Simone<br>22/07/2026</p>
-</div>
-<div class="buttons">
-<button onclick="downloadCert()">⬇ Scarica certificato</button>
-<button onclick="showSolution()">💡 Mostra soluzione</button>
-</div>
-</div>
-<script src="script.js"></script>
+        <button id="startBtn" class="primary-btn">Mostra il certificato</button>
+        <p class="hint">Poi comparirà una breve verifica prima del rilascio.</p>
+      </div>
+    </section>
+
+    <section id="verify" class="screen">
+      <div class="verify-card">
+        <div class="brand-mark pulse" aria-hidden="true">🧠</div>
+        <h2>Verifica Human Intelligence</h2>
+        <p class="verify-copy">Stiamo preparando il certificato…</p>
+
+        <div class="progress" aria-hidden="true">
+          <div id="progressFill" class="progress-fill"></div>
+        </div>
+
+        <div id="messageList" class="message-list" aria-live="polite">
+          <div class="message active">Avvio verifica…</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificateScreen" class="screen certificate-screen">
+      <div class="certificate-shell">
+        <div id="certificatePrintArea" class="certificate-stage">
+          <img class="certificate-bg" src="assets/certificate-bg.png" alt="" aria-hidden="true" />
+
+          <div class="certificate-overlay">
+            <div class="certificate-topnote">
+              <span>Laurea Simone</span>
+              <span>22/07/2026</span>
+            </div>
+
+            <div class="certificate-name-block">
+              <p class="small-label">Si certifica che</p>
+              <h2 id="certName" class="certificate-name"></h2>
+            </div>
+
+            <div class="certificate-foot">
+              <div class="score-box">
+                <span class="score-label">Human Intelligence Score</span>
+                <span class="score-value">100%</span>
+              </div>
+              <div class="id-row">
+                <span>Certificate ID</span>
+                <strong id="certId">HIC-2026-0000</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="printBtn" class="primary-btn">Stampa / salva PDF</button>
+          <p class="print-hint">Sul telefono usa “Condividi” o “Salva in PDF” dalla finestra di stampa.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>

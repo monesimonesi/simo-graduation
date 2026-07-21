@@ -1,42 +1,90 @@
-const msgs=[
-'Verificando attività neuronale...',
-'Connessione con ChatGPT...',
-'Connessione rifiutata.',
-'Modalità Human Intelligence attivata.',
-'Analisi completata.'
+const userNameInput = document.getElementById('nameInput');
+const startBtn = document.getElementById('startBtn');
+const printBtn = document.getElementById('printBtn');
+const landing = document.getElementById('landing');
+const verify = document.getElementById('verify');
+const certificateScreen = document.getElementById('certificateScreen');
+const certName = document.getElementById('certName');
+const certId = document.getElementById('certId');
+const progressFill = document.getElementById('progressFill');
+const messageList = document.getElementById('messageList');
+
+const verificationMessages = [
+  'Verificando attività neuronale…',
+  'Connessione con ChatGPT…',
+  'Connessione rifiutata.',
+  'Modalità Human Intelligence attivata.',
+  'Analisi completata.'
 ];
-function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
-function start(){
-const n=document.getElementById('name').value.trim();
-if(!n){alert('Inserisci il tuo nome');return;}
-window.userName=n;
-show('verify');
-let i=0;
-const fill=document.getElementById('fill');
-const status=document.getElementById('status');
-const t=setInterval(()=>{
-status.textContent=msgs[i];
-fill.style.width=((i+1)/msgs.length*100)+'%';
-i++;
-if(i===msgs.length){
-clearInterval(t);
-setTimeout(()=>finish(),700);
+
+let generatedCertId = '';
+
+function setActiveScreen(screen) {
+  [landing, verify, certificateScreen].forEach(el => el.classList.remove('active'));
+  screen.classList.add('active');
 }
-},700);
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
-function finish(){
-document.getElementById('certName').textContent=window.userName;
-document.getElementById('cid').textContent='Certificate ID: HIC-2026-'+Math.floor(1000+Math.random()*9000);
-show('certificateScreen');
+
+function formatCertificateId() {
+  const num = String(Math.floor(1000 + Math.random() * 9000));
+  return `HIC-2026-${num}`;
 }
-function downloadCert(){
-html2canvas(document.getElementById('certificate'),{scale:2}).then(canvas=>{
-const a=document.createElement('a');
-a.download='certificato.png';
-a.href=canvas.toDataURL();
-a.click();
+
+function renderMessages(index) {
+  messageList.innerHTML = '';
+  verificationMessages.forEach((text, i) => {
+    const node = document.createElement('div');
+    node.className = `message${i === index ? ' active' : i < index ? ' done' : ''}`;
+    node.textContent = text;
+    messageList.appendChild(node);
+  });
+}
+
+async function startFlow() {
+  const raw = userNameInput.value.trim();
+  if (!raw) {
+    userNameInput.focus();
+    userNameInput.setAttribute('placeholder', 'Inserisci il tuo nome');
+    return;
+  }
+
+  window.currentUserName = raw;
+  setActiveScreen(verify);
+
+  generatedCertId = formatCertificateId();
+  certId.textContent = generatedCertId;
+  progressFill.style.width = '0%';
+  renderMessages(0);
+
+  const stepDelay = 1100;
+  for (let i = 0; i < verificationMessages.length; i++) {
+    renderMessages(i);
+    progressFill.style.width = `${((i + 1) / verificationMessages.length) * 100}%`;
+    if (i < verificationMessages.length - 1) {
+      await sleep(stepDelay);
+    }
+  }
+
+  await sleep(650);
+  certName.textContent = window.currentUserName;
+  setActiveScreen(certificateScreen);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function triggerPrint() {
+  window.print();
+}
+
+startBtn.addEventListener('click', startFlow);
+printBtn.addEventListener('click', triggerPrint);
+
+userNameInput.addEventListener('keydown', (event) => {
+  if (event.key === 'Enter') {
+    startFlow();
+  }
 });
-}
-function showSolution(){
-alert('Qui comparirà la soluzione del rompicapo!');
-}
+
+userNameInput.focus();
