@@ -234,7 +234,7 @@ input:focus{
 }
 .certificate-person{
   position:absolute;
-  top:50.5%;
+  top:35%;
   left:50%;
   transform:translate(-50%,-50%);
   width:min(86%, 380px);
@@ -253,7 +253,7 @@ input:focus{
 .certificate-name{
   margin:0;
   font-family:Cinzel,serif;
-  font-size:clamp(1.75rem, 6vw, 2.55rem);
+  font-size:2vw;
   line-height:1.02;
   letter-spacing:.015em;
   text-shadow:
