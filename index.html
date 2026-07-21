@@ -10,6 +10,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
   <main class="app">
@@ -19,8 +20,8 @@
         <p class="eyebrow">Laurea Simone · 22/07/2026</p>
         <h1>Human Intelligence Certification</h1>
         <p class="intro">
-          Complimenti: hai risolto il rompicapo.
-          Prima di ricevere il certificato, raccontaci chi sei.
+          Complimenti: hai risolto il rompicapo e sei arrivato al certificato finale.
+          Prima di riceverlo, raccontaci chi sei.
         </p>
         <blockquote>
           “In un mondo che ci offre risposte immediate, non perdere il valore di porti le domande, il gusto di ragionare e la soddisfazione di trovare, con il tuo ingegno, la soluzione.”
@@ -32,7 +33,6 @@
         </label>
 
         <button id="startBtn" class="primary-btn">Mostra il certificato</button>
-        <p class="hint">Poi comparirà una breve verifica prima del rilascio.</p>
       </div>
     </section>
 
@@ -40,14 +40,14 @@
       <div class="verify-card">
         <div class="brand-mark pulse" aria-hidden="true">🧠</div>
         <h2>Verifica Human Intelligence</h2>
-        <p class="verify-copy">Stiamo preparando il certificato…</p>
+        <p class="verify-copy">Prepariamo il certificato…</p>
 
         <div class="progress" aria-hidden="true">
           <div id="progressFill" class="progress-fill"></div>
         </div>
 
-        <div id="messageList" class="message-list" aria-live="polite">
-          <div class="message active">Avvio verifica…</div>
+        <div id="messageList" class="message-list" aria-live="polite" aria-atomic="true">
+          <div id="messageText" class="message active">Avvio verifica…</div>
         </div>
       </div>
     </section>
@@ -58,32 +58,19 @@
           <img class="certificate-bg" src="assets/certificate-bg.png" alt="" aria-hidden="true" />
 
           <div class="certificate-overlay">
-            <div class="certificate-topnote">
-              <span>Laurea Simone</span>
-              <span>22/07/2026</span>
-            </div>
-
-            <div class="certificate-name-block">
+            <div class="certificate-person">
               <p class="small-label">Si certifica che</p>
               <h2 id="certName" class="certificate-name"></h2>
-            </div>
-
-            <div class="certificate-foot">
-              <div class="score-box">
-                <span class="score-label">Human Intelligence Score</span>
-                <span class="score-value">100%</span>
-              </div>
-              <div class="id-row">
-                <span>Certificate ID</span>
-                <strong id="certId">HIC-2026-0000</strong>
-              </div>
             </div>
           </div>
         </div>
 
         <div class="actions">
-          <button id="printBtn" class="primary-btn">Stampa / salva PDF</button>
-          <p class="print-hint">Sul telefono usa “Condividi” o “Salva in PDF” dalla finestra di stampa.</p>
+          <div class="download-grid">
+            <button id="pngBtn" class="primary-btn">Scarica immagine</button>
+            <button id="pdfBtn" class="secondary-btn">Scarica PDF</button>
+          </div>
+          <p class="print-hint">Su iPhone puoi usare il menu Condividi per salvarlo in Foto o File.</p>
         </div>
       </div>
     </section>
