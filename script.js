@@ -220,14 +220,30 @@ async function saveAsImage() {
 }
 
 
+function bindPress(el, handler) {
+  if (!el) return;
+
+  const run = (event) => {
+    if (event) {
+      if (event.type === 'click' && event.detail === 0) return;
+      event.preventDefault();
+    }
+    handler();
+  };
+
+  el.addEventListener('click', run, { passive: false });
+  el.addEventListener('pointerup', run, { passive: false });
+  el.addEventListener('touchend', run, { passive: false });
+}
+
 function init() {
-  if (!userNameInput || !startBtn || !pngBtn || !pdfBtn) {
+  if (!userNameInput || !startBtn || !pngBtn) {
     console.error('Elementi mancanti nel DOM');
     return;
   }
 
-  startBtn.addEventListener('click', startFlow);
-  pngBtn.addEventListener('click', saveAsImage);
+  bindPress(startBtn, startFlow);
+  bindPress(pngBtn, saveAsImage);
 
   userNameInput.addEventListener('keydown', (event) => {
     if (event.key === 'Enter') {
